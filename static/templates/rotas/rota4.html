@@ -13,65 +13,65 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    
-    <title>Praias Ceará-Mirim</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
-    <style>
-        body {
-          font-family: Arial, sans-serif;
-          background-color: #f6f6dc;
-          padding: 20px;
-          max-width: 800px;
-          margin: 0 auto;
-        }
-        h1 {
-          text-align: center;
-        }
-        #map {
-          height: 450px;
-          width: 100%;
-          border-radius: 10px;
-          box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
-          margin-bottom: 20px;
-          background: white;
-        }
-        #praias-list {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 15px;
-          justify-content: center;
-        }
-        #praias-list button {
-          padding: 10px 15px;
-          border: none;
-          border-radius: 8px;
-          background-color: #32cd32;
-          color: white;
-          font-size: 16px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-        }
-        #praias-list button:hover {
-          background-color: #2ba82b;
-        }
-        #info {
-          text-align: center;
-          margin-bottom: 20px;
-          font-weight: bold;
-          color: #333;
-        }
-        .leaflet-routing-container {
-          width: 260px !important;
-          max-height: 300px;
-          overflow-y: auto;
-          font-size: 13px;
-          background: #ffffffde;
-          border-radius: 10px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-          padding: 10px;
-        }
-      </style>
+
+        <title>Locais Religiosos - Ceará Mirim</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f6dc;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+          }
+          h1 {
+            text-align: center;
+          }
+          #map {
+            height: 450px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            background: white;
+          }
+          #religioso-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+          }
+          #religioso-list button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #32cd32;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+          #religioso-list button:hover {
+            background-color: #2ba82b;
+          }
+          #info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #333;
+          }
+          .leaflet-routing-container {
+            width: 260px !important;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 13px;
+            background: #ffffffde;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            padding: 10px;
+          }
+        </style>
 </head>
 
 <body>
@@ -100,21 +100,24 @@
     </header>
 
     <main>
-        </head>
         <body>
-          <h1>Praias - Ceará Mirim</h1>
+          <h1>Locais Religiosos - Ceará Mirim</h1>
           <div id="info">Tentando obter sua localização...</div>
           <div id="map"></div>
-          <div id="praias-list"></div>
+          <div id="religioso-list"></div>
         
           <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
           <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
           <script>
-            const praias = [
-              { nome: 'Praia de Muriú', latitude: -5.620, longitude: -35.400 }
+            const locaisReligiosos = [
+              { nome: 'Santuário', latitude: -5.634429, longitude: -35.425091 },
+              { nome: 'Capela do Engenho Cruzeiro', latitude: -5.609325, longitude: -35.402356 },
+              { nome: 'Casa Grande do Engenho Umburana', latitude: -5.611959, longitude: -35.408594 },
+              { nome: 'Casa Grande do Engenho Trigueiro', latitude: -5.614908, longitude: -35.410795 },
+              { nome: 'Largo Frei Damião', latitude: -5.644976, longitude: -35.448153 }
             ];
         
-            let map = L.map('map').setView([-5.62, -35.40], 13);
+            let map = L.map('map').setView([-5.63, -35.42], 13);
         
             const baseLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
               attribution: '&copy; OpenStreetMap contributors'
@@ -127,8 +130,8 @@
             let markerUsuario = null;
             const allMarkers = [];
         
-            praias.forEach((praia, index) => {
-              const marker = L.marker([praia.latitude, praia.longitude]).bindPopup(praia.nome);
+            locaisReligiosos.forEach((ponto, index) => {
+              const marker = L.marker([ponto.latitude, ponto.longitude]).bindPopup(ponto.nome);
               marker.on('click', () => mostrarSomente(marker));
               allMarkers.push(marker);
             });
@@ -185,11 +188,11 @@
                   .openPopup();
         
                 markerUsuario.on('click', () => {
-                  const destino = praias.find(p => p.nome === popupAberto.getPopup().getContent());
+                  const destino = locaisReligiosos.find(p => p.nome === popupAberto.getPopup().getContent());
                   if (destino) traçarRota(destino);
                 });
         
-                map.setView([posicaoUsuario.latitude, posicaoUsuario.longitude], 13);
+                map.setView([posicaoUsuario.latitude, posicaoUsuario.longitude], 14);
               }, err => {
                 document.getElementById('info').textContent = 'Erro ao obter localização: ' + err.message;
               });
@@ -197,13 +200,13 @@
         
             obterLocalizacao();
         
-            const listaDiv = document.getElementById('praias-list');
-            praias.forEach((praia, index) => {
+            const listaDiv = document.getElementById('religioso-list');
+            locaisReligiosos.forEach((ponto, index) => {
               const btn = document.createElement('button');
-              btn.textContent = praia.nome;
+              btn.textContent = ponto.nome;
               btn.addEventListener('click', () => {
                 mostrarSomente(allMarkers[index]);
-                traçarRota(praia);
+                traçarRota(ponto);
               });
               listaDiv.appendChild(btn);
             });
